@@ -9,4 +9,3 @@ this project is about manage todo list user can add,edit and delete lite.
 
 2. npm install 
 
-3. npm install antd 
