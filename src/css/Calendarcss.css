@@ -1,0 +1,10 @@
+.calendar{
+      position: absolute;
+      width:30%;
+      height: 65%;
+      background: #FFFFFF;
+      box-shadow: -4px 4px 4px rgba(184, 184, 184, 0.25);
+      border-radius: 20px 0px 0px 20px;
+      top:10%;
+      right: 0;
+}
