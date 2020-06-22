@@ -1,7 +1,9 @@
 import React from 'react';
 import './css/App.css';
-import AddToDo from './component/AddToDo'
-import ToDoList from './component/ToDoList'
+import AddToDo from './component/AddToDo';
+import ToDoList from './component/ToDoList';
+import Header from './component/Header';
+import Calendar from './component/Calendar';
 
 class App extends React.Component {
   constructor(props) {
@@ -12,7 +14,8 @@ class App extends React.Component {
         title: '',
         key: '',
         done: false
-      }
+      },
+      user: 'MMONN',
     }
     this.handleInput = this.handleInput.bind(this);
     this.addItem = this.addItem.bind(this);
@@ -70,16 +73,15 @@ class App extends React.Component {
   render() {
     return (
       <div className="container">
-        <h1>TO DO LIST</h1>
-        <div className="content">
-          <AddToDo value={this.state.item.title} onSubmit={this.addItem} onChange={this.handleInput} />
-          <ToDoList items={this.state.List}
-            remove={this.removeItem}
-            update={this.update}
-            remark={this.remark}
-            value={this.state.item.done}
-          />
-        </div>
+        <Header user={this.state.user}/>
+        <Calendar />
+        <AddToDo value={this.state.item.title} onSubmit={this.addItem} onChange={this.handleInput} />
+        <ToDoList items={this.state.List}
+          remove={this.removeItem}
+          update={this.update}
+          remark={this.remark}
+          value={this.state.item.done}
+        />
       </div>
     );
   }
