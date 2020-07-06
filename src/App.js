@@ -1,90 +1,82 @@
-import React from 'react';
+import React, { useState } from 'react';
 import './css/App.css';
 import AddToDo from './component/AddToDo';
 import ToDoList from './component/ToDoList';
 import Header from './component/Header';
-import Calendar from './component/Calendar';
+import Calendars from './component/Calendar';
 
-class App extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      List: [],
-      item: {
-        title: '',
-        key: '',
-        done: false
-      },
-      user: 'MMONN',
-    }
-    this.handleInput = this.handleInput.bind(this);
-    this.addItem = this.addItem.bind(this);
-    this.removeItem = this.removeItem.bind(this);
-    this.update = this.update.bind(this);
-    this.todoDone = this.todoDone.bind(this)
-  }
-  handleInput(e) {
-    this.setState({
-      item: {
+
+function App() {
+  const [List, setList] = useState([]);
+  const [item, setItem] = useState({
+    title: '',
+    key: '',
+    done: false,
+  });
+  const [user, setUser] = useState('MMONN');
+
+  const handleInput = (e) =>
+    setItem({
         title: e.target.value,
         key: new Date,
-      }
     })
-  }
-  addItem(e) {
+
+  const addItem = (e) => {
     e.preventDefault();
-    const newItem = this.state.item
-    const key = this.state.item.key
-    const newKey = key.length + 1
-    console.log(newItem)
+    const newItem = item;
+    const keys = item.key;
+    const newKey = { keys }.length + 1
+    // console.log(newItem)s
     if (newItem.title !== "") {
-      const List = [...this.state.List, newItem];
-      this.setState({
-        List: List,
-        item: {
+      const Lists = [...List, newItem];
+      setList(Lists)
+      console.log(Lists)
+      setItem(
+        {
           title: '',
           key: ''
         }
-      })
+      )
+      console.log(item)
     }
   }
-  removeItem(key) {
-    const filterItem = this.state.List.filter(item =>
+
+  const removeItem = (key) => {
+    const filterItem = List.filter(item =>
       item.key !== key);
-    this.setState({
-      List: filterItem
-    })
+    setList(filterItem)
   }
-  update(title, key) {
-    const items = this.state.List;
+
+  const update = (title, key) => {
+    const items = List;
     items.map(item => {
       if (item.key === key) {
         item.title = title
       }
     })
-    this.setState({
+    setItem({
       items: items
     })
   }
-  todoDone() {
-    const index = this.state.item.key
-    console.log(index)
-  }
-  render() {
-    return (
-      <div className="container">
-        <Header user={this.state.user}/>
-        <Calendar />
-        <AddToDo value={this.state.item.title} onSubmit={this.addItem} onChange={this.handleInput} />
-        <ToDoList items={this.state.List}
-          remove={this.removeItem}
-          update={this.update}
-          remark={this.remark}
-          value={this.state.item.done}
-        />
-      </div>
-    );
-  }
 
+  // const  todoDone = () => {
+  //   const index = {item.key}
+  //   console.log(index)
+  // }
+
+  return (
+    <>
+      <Header user={user} />
+      <Calendars />
+      <AddToDo value={item.title} onSubmit={addItem} onChange={handleInput} />
+      <ToDoList items={List}
+        remove={removeItem}
+        update={update}
+        // remark={remark}
+        value={item.done}
+      />
+    </>
+  )
 }
+
 export default App;
