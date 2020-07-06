@@ -1,10 +1,16 @@
 .calendar{
       position: absolute;
       width:30%;
-      height: 65%;
+      height: 55%;
       background: #FFFFFF;
       box-shadow: -4px 4px 4px rgba(184, 184, 184, 0.25);
-      border-radius: 20px 0px 0px 20px;
+      border-radius: 20px ;
       top:10%;
       right: 0;
 }
+.react-calendar {
+      width: auto !important;
+      height: 100%;
+      border-radius: 20px;
+      border: unset !important;
+  }
